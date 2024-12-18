@@ -4,10 +4,10 @@ import Main from './Components/main/Main'
 
 const App = () => {
   return (
-    <div>
+    <>
       <Sidebar/>
       <Main/>
-    </div>
+    </>
   )
 }
 
