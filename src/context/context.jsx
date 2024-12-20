@@ -1,6 +1,5 @@
 import { createContext, useState } from "react";
 import run from "../config/gemini";
-import { use } from "react";
 
 export const Context = createContext();
 
@@ -50,15 +49,29 @@ const ContextProvider = (props) => {
   //     setInput("");
   //   };
 
+  const newChat =()=>{
+    setLoading(false)
+    setShowResult(false)
+  }
+
   const onSend = async (prompt) => {
     setResultData("");
     setLoading(true);
     setShowResult(true);
     const query = prompt || input; // Use prompt if provided, otherwise use input
-    setRecentPrompt(query);
+    let response;
+    if (prompt !== undefined) {
+      response = await run(query);
+
+      setRecentPrompt(query);
+    } else {
+      setPrevPrompt((prev) => [...prev, query]);
+      setRecentPrompt(query)
+      response = await run(query)
+    }
 
     try {
-      const response = await run(query);
+      // const response = await run(query);
       let responseArray = response.split("**");
       let newResponse = "";
 
@@ -77,8 +90,8 @@ const ContextProvider = (props) => {
         delayPara(i, nextWord + "  ");
       }
 
-      console.log("🚀 ~ onSend ~ response:", response);
-      setResultData(newResponse2);
+      // console.log("🚀 ~ onSend ~ response:", response);
+      // setResultData(newResponse2);
     } catch (error) {
       console.error("Error in onSend:", error);
       setResultData("An error occurred while fetching the response.");
@@ -102,6 +115,7 @@ const ContextProvider = (props) => {
     showResult,
     loading,
     resultData,
+    newChat
   };
 
   return (

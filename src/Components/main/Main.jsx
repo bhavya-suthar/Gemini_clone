@@ -32,23 +32,47 @@ const Main = () => {
                 <p>How can I help you Today?</p>
               </div>
               <div className="cards">
-                <div className="card">
+                <div
+                  className="card"
+                  onClick={() =>
+                    setInput(
+                      "Suggest beautiful places to see on an upcoming road trip"
+                    )
+                  }
+                >
                   <p>
                     Suggest beautiful places to see on an upcoming road trip
                   </p>
                   <img src={assets.compass_icon} alt="" />
                 </div>
-                <div className="card">
+                <div
+                  className="card"
+                  onClick={() =>
+                    setInput("Briefly Summerize this concept: urban planning")
+                  }
+                >
                   <p>Briefly Summerize this concept: urban planning</p>
                   <img src={assets.bulb_icon} alt="" />
                 </div>
-                <div className="card">
+                <div
+                  className="card"
+                  onClick={() =>
+                    setInput(
+                      "Brainstrom team boanding activities for our work retreat"
+                    )
+                  }
+                >
                   <p>
                     Brainstrom team boanding activities for our work retreat
                   </p>
                   <img src={assets.message_icon} alt="" />
                 </div>
-                <div className="card">
+                <div
+                  className="card"
+                  onClick={() =>
+                    setInput("Improve the readebility of the following code")
+                  }
+                >
                   <p>Improve the readebility of the following code</p>
                   <img src={assets.code_icon} alt="" />
                 </div>
@@ -85,7 +109,9 @@ const Main = () => {
               <div>
                 <img src={assets.gallery_icon} alt="" />
                 <img src={assets.mic_icon} alt="" />
-                <img onClick={() => onSend()} src={assets.send_icon} alt="" />
+                {input ? (
+                  <img onClick={() => onSend()} src={assets.send_icon} alt="" />
+                ) : null}
               </div>
             </div>
             <p className="bottom-info">
